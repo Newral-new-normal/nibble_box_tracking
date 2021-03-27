@@ -43,4 +43,41 @@ Call it from a command prompt:
 python .\exporter_main_v2.py --input_type image_tensor --pipeline_config_path .\models\box_centernet_resnet101_v1_fpn_512\pipeline.config --trained_checkpoint_dir .\models\box_centernet_resnet101_v1_fpn_512\ --output_directory .\exported-models\package_centernet_resnet
 
 
+### Appendix: Environment installation 
+
+## Conda environment `nib_box_track` for tensorflow-gpu 2.2.0
+
+Best approach so far (from here: https://stackoverflow.com/questions/65273118/why-is-tensorflow-not-recognizing-my-gpu-after-conda-install):
+
+```
+conda create --name nib_box_track tensorflow-gpu=2.1
+conda activate nib_box_track
+pip install tensorflow-gpu==2.2.0 --user
+```
+The first one will install automatically cuDNN and CUDAToolkit (a pain in the ass if you go manual).
+Then activate and upgrade with `pip` the tf version (`--user` flag optional if it an error is thrown without it).
+
+Check it
+```
+python
+>>> import tensorflow as tf 
+>>> tf.test.is_built_with_cuda() # True
+>>> tf.test.is_gpu_available(cuda_only=False, min_cuda_compute_capability=None) # GeForce GTX 1660 SUPER, Compute Capability 7.5
+```
+
+## Additional actions needed 
+
+Install https://visualstudio.microsoft.com/es/thank-you-downloading-visual-studio/?sku=BuildTools&rel=16
+Checking MSVC 14+
+
+```
+
+```
+
+In order to get `object_detection` python library to work:
+```
+git clone https://github.com/tensorflow/models.git
+cd models/research
+protoc object_detection/protos/*.proto --python_out=.
+`` 
 
