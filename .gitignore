@@ -2,8 +2,4 @@ data/
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
 *.zip
-models
-training_demo/models
-training_demo/pre-trained-models
 models/
-training_demo/notebooks
