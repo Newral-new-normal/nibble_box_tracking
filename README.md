@@ -43,9 +43,9 @@ Call it from a command prompt:
 python .\exporter_main_v2.py --input_type image_tensor --pipeline_config_path .\models\box_centernet_resnet101_v1_fpn_512\pipeline.config --trained_checkpoint_dir .\models\box_centernet_resnet101_v1_fpn_512\ --output_directory .\exported-models\package_centernet_resnet
 
 
-### Appendix: Environment installation 
+## Appendix: Environment installation 
 
-## Conda environment `nib_box_track` for tensorflow-gpu 2.2.0
+### Conda environment `nib_box_track` for tensorflow-gpu 2.2.0
 
 Best approach so far (from here: https://stackoverflow.com/questions/65273118/why-is-tensorflow-not-recognizing-my-gpu-after-conda-install):
 
@@ -66,7 +66,7 @@ python
 >>> tf.test.is_gpu_available(cuda_only=False, min_cuda_compute_capability=None) # GeForce GTX 1660 SUPER, Compute Capability 7.5
 ```
 
-## Additional actions needed `object_detection` package
+### Additional actions needed `object_detection` package
 
 https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/install.html#tensorflow-object-detection-api-installation
 
