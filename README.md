@@ -55,6 +55,7 @@ conda activate nib_box_track
 pip install tensorflow-gpu==2.2.0 --user
 ```
 The first one will install automatically cuDNN and CUDAToolkit (a pain in the ass if you go manual).
+
 Then activate and upgrade with `pip` the tf version (`--user` flag optional if it an error is thrown without it).
 
 Check it
@@ -65,19 +66,30 @@ python
 >>> tf.test.is_gpu_available(cuda_only=False, min_cuda_compute_capability=None) # GeForce GTX 1660 SUPER, Compute Capability 7.5
 ```
 
-## Additional actions needed 
+## Additional actions needed `object_detection` package
 
-Install https://visualstudio.microsoft.com/es/thank-you-downloading-visual-studio/?sku=BuildTools&rel=16
-Checking MSVC 14+
+https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/install.html#tensorflow-object-detection-api-installation
 
-```
-
-```
+(Install https://visualstudio.microsoft.com/es/thank-you-downloading-visual-studio/?sku=BuildTools&rel=16
+Checking MSVC 14+)
 
 In order to get `object_detection` python library to work:
 ```
 git clone https://github.com/tensorflow/models.git
 cd models/research
 protoc object_detection/protos/*.proto --python_out=.
-`` 
 
+cd object_detection/packages/tf2/setup.py .
+python -m pip install .
+
+# From within TensorFlow/models/research/
+cp object_detection/packages/tf2/setup.py . # copy object_detection\packages\tf2\setup.py .
+python -m pip install .
+```
+
+Test it:
+
+```
+# From within TensorFlow/models/research/
+python object_detection/builders/model_builder_tf2_test.py
+```
