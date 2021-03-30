@@ -79,9 +79,6 @@ git clone https://github.com/tensorflow/models.git
 cd models/research
 protoc object_detection/protos/*.proto --python_out=.
 
-cd object_detection/packages/tf2/setup.py .
-python -m pip install .
-
 # From within TensorFlow/models/research/
 cp object_detection/packages/tf2/setup.py . # copy object_detection\packages\tf2\setup.py .
 python -m pip install .
