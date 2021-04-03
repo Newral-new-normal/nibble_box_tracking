@@ -1,6 +1,9 @@
 data/
+images/
+models/
+exported-models/
+pre-trained-models/
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
 *.zip
-models/
-training_demo/
+*.ini
