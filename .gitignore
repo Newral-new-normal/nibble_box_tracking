@@ -7,3 +7,4 @@ pre-trained-models/
 */.ipynb_checkpoints/*
 *.zip
 *.ini
+*~
