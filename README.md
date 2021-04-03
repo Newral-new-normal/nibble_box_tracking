@@ -2,6 +2,8 @@
 
 The current folder (training_demo/) mostly mimics the procedure explained in https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/index.html
 
+We've decided to use labelme instead the tool used in the tutorial (labelimg). The main difference is the we get the annotations in JSON format.
+
 
 ### Data adquisition
 
@@ -43,7 +45,7 @@ Call it from a command prompt:
 python .\exporter_main_v2.py --input_type image_tensor --pipeline_config_path .\models\box_centernet_resnet101_v1_fpn_512\pipeline.config --trained_checkpoint_dir .\models\box_centernet_resnet101_v1_fpn_512\ --output_directory .\exported-models\package_centernet_resnet
 
 
-## Appendix: Environment installation 
+## Appendix: Environment installation
 
 ### Conda environment `nib_box_track` for tensorflow-gpu 2.2.0
 
@@ -61,7 +63,7 @@ Then activate and upgrade with `pip` the tf version (`--user` flag optional if i
 Check it
 ```
 python
->>> import tensorflow as tf 
+>>> import tensorflow as tf
 >>> tf.test.is_built_with_cuda() # True
 >>> tf.test.is_gpu_available(cuda_only=False, min_cuda_compute_capability=None) # GeForce GTX 1660 SUPER, Compute Capability 7.5
 ```
