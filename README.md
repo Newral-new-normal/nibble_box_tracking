@@ -1,8 +1,28 @@
-# Notes on TF object detection API
+# Nibble Box Tracking
+Box, bucket and tray tracking project for Nibble Auotomation.
 
-The current folder (training_demo/) mostly mimics the procedure explained in https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/index.html
+## Structure
+    .
+    ├── data
+    ├── models
+    ├── notebooks
+    └── object_detection_API
+        ├── exported-models
+        ├── images
+        ├── models
+        ├── pre-trained-models
+        ├── src
+        ├── exporter_main_v2.py
+        ├── labelmap.pbtxt
+        └── model_main_tf2.py
+    ├── src
+    └── README.md
 
-We've decided to use labelme instead the tool used in the tutorial (labelimg). The main difference is the we get the annotations in JSON format.
+## Notes on TF object detection API
+
+The object_detection_API folder mostly mimics the procedure explained in https://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/index.html
+
+We've decided to use labelme instead of the tool used in the tutorial (labelimg). The main difference is the we get the annotations in JSON format.
 
 
 ### Data adquisition
@@ -11,7 +31,7 @@ In the images/train folder the images of packages annotated with labelme (https:
 
 Create the labelmap.pbtxt for the classes to be detected (in this example it is stored in /images).
 
-In the version used, the dataset consisted on 847 photos that belonged to 12 videos. The train-validation split was done using notebooks/0_test_train_split.ipynb, where all the images from 4 random videos were chosen as the validation set and the rest as the training set. Validation videos ids: ['476762116', '477008982', '141728167', '162812920']; which supposed a 34% of the total number of photos.
+In the version used, the dataset consisted on 847 photos that belonged to 12 videos. The train-validation split was done using notebooks/05_test_train_split.ipynb, where all the images from 4 random videos were chosen as the validation set and the rest as the training set. Validation videos ids: ['476762116', '477008982', '141728167', '162812920']; which supposed a 34% of the total number of photos.
 
 The annotation json's were transformed into tfrecords using the code from src/labelme_json_to_tfrecord.py. Example of call in command prompt at models/research:
 
