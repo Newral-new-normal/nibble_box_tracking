@@ -3,14 +3,14 @@ Box, bucket and tray tracking project for Nibble Auotomation.
 
 ## Structure
     .
-    ├── data
-    ├── models
+    ├── data                      # Ignored
+    ├── models                    # Ignored
     ├── notebooks
     └── object_detection_API
-        ├── exported-models
-        ├── images
-        ├── models
-        ├── pre-trained-models
+        ├── exported-models       # Ignored
+        ├── images                # Ignored
+        ├── models                # Ignored
+        ├── pre-trained-models    # Ignored
         ├── src
         ├── exporter_main_v2.py
         ├── labelmap.pbtxt
