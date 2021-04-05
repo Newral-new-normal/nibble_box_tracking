@@ -1,8 +1,10 @@
 data/
-images/
 models/
-exported-models/
-pre-trained-models/
+src/
+object_detection_API/images/
+object_detection_API/models/
+object_detection_API/exported-models/
+object_detection_API/pre-trained-models/
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
 *.zip
