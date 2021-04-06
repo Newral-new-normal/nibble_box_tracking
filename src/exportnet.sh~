@@ -1,1 +1,0 @@
-python .\exporter_main_v2.py --input_type image_tensor --pipeline_config_path .\models\box_centernet_resnet101_v1_fpn_512\pipeline.config --trained_checkpoint_dir .\models\box_centernet_resnet101_v1_fpn_512\ --output_directory .\exported-models\package_centernet_resnet
