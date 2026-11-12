@@ -85,11 +85,11 @@ técnicos van aparte, en la sección 8. Sirve de punto de partida para decidir c
 | 5a | Entrenamiento de CenterNet ResNet101 FPN 512 | ✅ Entrenado. ⚠️ Solo carga en la máquina con la que se entrenó (ver 8.2) | Drive `object_detection_API/models/box_centernet_resnet101_v1_fpn_512` |
 | 5b | Entrenamiento de SSD MobileNet v2 FPNLite 320 | ✅ Entrenado y exportado. Es el que acabó usándose | Drive `models/package_ssd_mobilenet_v2_fpnlite_320.zip` |
 | 6 | Evaluación | ❌ No hay métricas guardadas (mAP o similar). Solo inspección visual | — |
-| 7 | Detección en tiempo real en PC | ✅ Webcam y SSD con la API de TF; vídeo grabado | `drive_snapshot/newral_drive/repos/tf_webcam_detection`; Drive `outputff.avi` |
+| 7 | Detección en tiempo real en PC | ✅ Webcam y SSD con la API de TF; vídeo grabado | Repo [`tf_webcam_detection`](https://github.com/Newral-new-normal/tf_webcam_detection) (`src/real_time.py`); Drive `outputff.avi` |
 | 8 | Tracking | 🧪 Empezado: función `iou()`, filtro de detecciones (score > 0,5 y caja menor de 2/3 del fotograma) e IDs de visualización fijos `[0,1,2,3]`. **No hay bucle de asociación entre fotogramas** | `drive_snapshot/nibble_box_tracking_drive/notebooks/08_box_tracking.ipynb` |
 | 8b | Trayectoria esperada | 🧪 Herramienta para dibujar los segmentos por los que debería pasar el centro de la caja; guarda un JSON que nada consume todavía | `src/path_annotation.py` |
 | 9 | Conversión a TFLite | ⚠️ Intentada; un resultado de 696 bytes indica que falló [I] | Drive `Newral/tf_models`, `tf_lite_models` |
-| 10 | Despliegue en Raspberry Pi | 📋 Solo preparación: streaming de la Raspberry Pi al PC, config `_rpi` y rama vacía | `drive_snapshot/newral_drive/repos/live_video_stream_rpi_over_network` |
+| 10 | Despliegue en Raspberry Pi | 📋 Solo preparación: streaming de la Raspberry Pi al PC, notas de instalación de TF 2.4 para armv6, config `_rpi` (idéntica a `_v_mep`) y rama vacía | Repo [`live_video_stream_rpi_over_network`](https://github.com/Newral-new-normal/live_video_stream_rpi_over_network); `drive_snapshot/newral_drive/repos/tf_webcam_detection/README.md` |
 
 ## 5. Dónde está cada cosa
 
@@ -157,19 +157,28 @@ Enlace: <https://drive.google.com/drive/folders/1WnFAHamnQthtt-8MsntyPpeK0wRxDAT
 |---|---|
 | `docs/` | Borrador de la joint venture con Nibble (14-03-2021) y documentos societarios de Newral. Los societarios no van al repo |
 | `infographies/` | Infografía de la joint venture (nube de palabras y apretón de manos), logos, tipografías y notebook `word_cloud_infography.ipynb` |
-| `repos/tf_webcam_detection/` | Detección en tiempo real con webcam (TF y TFLite) y grabación a `.avi`. **Copiado a `drive_snapshot/`** |
-| `repos/live_video_stream_rpi_over_network/` | Servidor y cliente de streaming de vídeo de la Raspberry Pi al PC. **Copiado a `drive_snapshot/`** |
-| `repos/Live-Video-Stream-from-Raspberry-Pi-Camera-over-the-Network/` | Mismo contenido que el anterior (clon original) |
+| `repos/tf_webcam_detection/` | Detección en tiempo real con webcam (TF y TFLite) y grabación a `.avi`. Es el mismo código que en GitHub (ver 5.4); su README es más reciente y está en `drive_snapshot/` |
+| `repos/live_video_stream_rpi_over_network/` | Servidor y cliente de streaming de vídeo de la Raspberry Pi al PC (socket y JPEG). Es el mismo que en GitHub (ver 5.4) |
+| `repos/Live-Video-Stream-from-Raspberry-Pi-Camera-over-the-Network/` | Clon del repo original de terceros (Arijit1080), del que sale el anterior |
 | `repos/tensorflow/models/` | Clon de `tensorflow/models`. No se copia |
 | `repos/nibble_box_tracking` | Acceso directo a la carpeta del 5.2 |
 | `tf_models/` | Modelos del zoo de TF1 cuantizados (SSD MobileNet v1, v1 PPN, v3 small), aptos para TFLite, y una copia de trabajo de `package_ssd_mobilenet_v2_fpnlite_320` con `package_detect.tflite` (696 bytes) |
-| `tf_lite_models/` | `detect.tflite` (6,9 MB, 02-05), `tflite_graph.pb` (27,7 MB) y comandos de conversión |
+| `tf_lite_models/` | `detect.tflite` (6,9 MB, 02-05) y `tflite_graph.pb` (27,7 MB), convertidos desde un modelo TF1 del zoo, más una versión anterior de los comandos de conversión |
 | `rpi_issues/` | Vacía |
 | `cudnn-11.3-windows-x64-v8.2.0.53/` | Instalador de cuDNN para Windows. Irrelevante |
 
+### 5.4 Otros repositorios de GitHub (organización Newral-new-normal)
+
+| Repo | Contenido | Último push |
+|---|---|---|
+| [`tf_webcam_detection`](https://github.com/Newral-new-normal/tf_webcam_detection) | `real_time.py` y `TF_real_time_detection_webcam.py` (webcam y SSD con la API de TF); `TFLite_detection_webcam.py` (adaptado de EdjeElectronics/Shawn Hymel); `tflite_convert_commands_Windows.txt` con los intentos de conversión; `video_writer*.py` | 09-05-2021 |
+| [`live_video_stream_rpi_over_network`](https://github.com/Newral-new-normal/live_video_stream_rpi_over_network) | `pi_video_client.py` (Raspberry Pi con picamera, envía JPEG por socket) y `pi_video_server.py` (PC). Copia de Arijit1080 | 15-05-2021 |
+
+Juntos con este repo, son todo el código del proyecto.
+
 ## 6. `drive_snapshot/`
 
-Copia **literal** del código y la configuración que solo existían en Drive. La estructura y el detalle
+Copia **literal** del código y la configuración que solo existían en Drive y en ningún repositorio. La estructura y el detalle
 fichero a fichero están en [`drive_snapshot/README.md`](../drive_snapshot/README.md). Lo único que se
 ha cambiado: en los dos notebooks copiados se han **eliminado las imágenes de las salidas**, que eran
 fotogramas de stock de Getty, porque el repo es público. El texto de las salidas y las trazas de error
@@ -204,9 +213,10 @@ se mantienen.
    de la Object Detection API** entre máquinas [I]. Por eso, en mayo, `08_box_tracking` pasó al SSD.
 2. **No hay evaluación cuantitativa guardada.** Los notebooks de few-shot "prueban" con imágenes de
    entrenamiento.
-3. **Conversión a TFLite inconclusa.** El SSD v2 FPNLite (TF2) no generó un `.tflite` válido (696
-   bytes). Se probó con modelos cuantizados de TF1 del zoo, que sí convierten, pero no están entrenados
-   con nuestras cajas [I].
+3. **Conversión a TFLite inconclusa.** Los comandos guardados muestran `export_tflite_graph_tf2.py` y
+   después `tflite_convert --saved_model_dir`. El SSD v2 FPNLite (TF2) solo produjo un `.tflite` de 696
+   bytes, es decir, no válido. El `detect.tflite` de 6,9 MB sale de un `tflite_graph.pb` de TF1 (la ruta
+   `--enable_v1_converter`), coherente con los modelos del zoo de TF1 descargados, no con el nuestro [I].
 
 ### 8.3 Código
 
@@ -228,8 +238,8 @@ se mantienen.
 ### 8.4 Organización
 
 1. **Dos copias del proyecto mezcladas en una sola carpeta de Drive**, y la de Beñat está incompleta.
-2. **Trabajo de mayo repartido en cuatro sitios**: el Drive del proyecto, el Drive de Newral, repos
-   locales sin remoto y una rama vacía. Este documento y `drive_snapshot/` lo unifican en lectura; en
+2. **Trabajo de mayo repartido en cinco sitios**: el Drive del proyecto, el Drive de Newral, dos repos
+   de GitHub independientes y una rama vacía en este. Este documento y `drive_snapshot/` lo unifican en lectura; en
    Drive no se ha movido nada.
 
 ## 9. Pendiente de este levantamiento
